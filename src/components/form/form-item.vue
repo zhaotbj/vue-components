@@ -10,7 +10,7 @@
 <script>
 import AsyncValidator from "async-validator";
 // import Emitter from "../../mixins/emitter.js";
-
+import Bus from '../../assets/bus.js'
 export default {
   name: "iFormItem",
   // mixins: [Emitter],
@@ -47,8 +47,12 @@ export default {
         });
       }
 
-      this.$on("on-form-blur", this.onFieldBlur);
-      this.$on("on-form-change", this.onFieldChange);
+      Bus.$on("on-form-blur", ()=> {
+        this.onFieldBlur()
+      });
+      Bus.$on("on-form-change", ()=>{
+        this.onFieldChange()
+      });
     },
     // 从 Form 的 rules 属性中，获取当前 FormItem 的校验规则
     getRules() {
@@ -104,6 +108,7 @@ export default {
       this.form.model[this.prop] = this.initialValue;
     },
     onFieldBlur() {
+      console.log('监听到了input, blur')
       this.validate("blur");
     },
     onFieldChange() {
@@ -115,6 +120,7 @@ export default {
     // 如果没有传入 prop，则无需校验，也就无需缓存
     if (this.prop) {
       // this.dispatch("iForm", "on-form-item-add", this);
+      Bus.$emit("iForm", "on-form-item-add", this)
 
       // 设置初始值，以便在重置时恢复默认值
       this.initialValue = this.fieldValue;
@@ -125,6 +131,7 @@ export default {
   // 组件销毁前，将实例从 Form 的缓存中移除
   beforeDestroy() {
     // this.dispatch("iForm", "on-form-item-remove", this);
+     Bus.$emit("on-form-item-remove", this);
   }
 };
 </script>

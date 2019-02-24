@@ -4,6 +4,7 @@
   </form>
 </template>
 <script>
+import Bus from '../../assets/bus.js'
 export default {
   name: "iForm",
   props: {
@@ -54,10 +55,11 @@ export default {
     }
   },
   created() {
-    this.$on("on-form-item-add", field => {
+    Bus.$on("on-form-item-add", field => {
+      console.log('on-form-item-add', field)
       if (field) this.fields.push(field);
     });
-    this.$on("on-form-item-remove", field => {
+    Bus.$on("on-form-item-remove", field => {
       if (field.prop) this.fields.splice(this.fields.indexOf(field), 1);
     });
   }
