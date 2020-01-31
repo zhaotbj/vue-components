@@ -33,7 +33,7 @@
       <hm-button circle icon="el-icon-message" type="danger"></hm-button>
     </div>
 
-        <hm-button type="primary" @click="visable=true">dialog</hm-button>
+    <hm-button type="primary" @click="visable=true">dialog</hm-button>
     <!-- <hm-dialog title="我是标题"></hm-dialog> -->
     <!-- 标题插槽模式 -->
     <hm-dialog width="30%" top="30px" :visable.sync="visable">
@@ -50,13 +50,26 @@
         <hm-button @click="visable=false">取消</hm-button>
       </template>
     </hm-dialog>
+
+    <hm-input placeholder="请输入" type="text"  v-model="username" clearable></hm-input>
+    <br>
+    <hm-input placeholder="请输入" :disabled="true"></hm-input>
+    <br>
+    <hm-input placeholder="请输入" type="password" showPassword v-model="username"></hm-input>
+
+    <hm-switch v-model="value"></hm-switch>
+    <!-- 自定义颜色 -->
+    <hm-switch v-model="value" active-color="green" in-active-color="red" name="username"></hm-switch>
+    <hm-radio></hm-radio>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      visable: false
+      visable: false,
+      username:'zs',
+      value:false
     }
   },
   methods: {
@@ -71,6 +84,9 @@ export default {
 <style lang="scss">
 .row {
   margin-bottom: 20px;
+}
+.el-input {
+  width: 180px!important;
 }
 </style>
 
