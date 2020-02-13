@@ -15,6 +15,8 @@ import {HmButton} from 'atg-ui'
 Vue.component(HmButton.name, HmButton)
 ```
 
+
+以下配置为组件打包，发布npm的配置。
 ### 文件目录
 ```
 ├── dist npm发布的打包文件
